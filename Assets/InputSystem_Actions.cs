@@ -183,15 +183,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ThrowGranade"",
-                    ""type"": ""Button"",
-                    ""id"": ""1909b9aa-3f83-4b51-b1fd-815011ab2659"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Flashlight"",
                     ""type"": ""Button"",
                     ""id"": ""9c6dd43c-a34e-4f49-8f5d-3615d956e3bb"",
@@ -201,7 +192,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""TakePhoto"",
+                    ""name"": ""Photo"",
                     ""type"": ""Button"",
                     ""id"": ""94b1cfe1-9f82-4f94-8d56-916d9b4a47d2"",
                     ""expectedControlType"": """",
@@ -609,17 +600,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c7c66e96-ce6a-48b7-a599-c3bb567a33fd"",
-                    ""path"": ""<Keyboard>/g"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""ThrowGranade"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""068f44f0-fb80-49a4-a590-15af5c8c7aba"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
@@ -636,7 +616,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TakePhoto"",
+                    ""action"": ""Photo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1234,9 +1214,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
-        m_Player_ThrowGranade = m_Player.FindAction("ThrowGranade", throwIfNotFound: true);
         m_Player_Flashlight = m_Player.FindAction("Flashlight", throwIfNotFound: true);
-        m_Player_TakePhoto = m_Player.FindAction("TakePhoto", throwIfNotFound: true);
+        m_Player_Photo = m_Player.FindAction("Photo", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1340,9 +1319,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Next;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Aim;
-    private readonly InputAction m_Player_ThrowGranade;
     private readonly InputAction m_Player_Flashlight;
-    private readonly InputAction m_Player_TakePhoto;
+    private readonly InputAction m_Player_Photo;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1395,17 +1373,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         /// <summary>
-        /// Provides access to the underlying input action "Player/ThrowGranade".
-        /// </summary>
-        public InputAction @ThrowGranade => m_Wrapper.m_Player_ThrowGranade;
-        /// <summary>
         /// Provides access to the underlying input action "Player/Flashlight".
         /// </summary>
         public InputAction @Flashlight => m_Wrapper.m_Player_Flashlight;
         /// <summary>
-        /// Provides access to the underlying input action "Player/TakePhoto".
+        /// Provides access to the underlying input action "Player/Photo".
         /// </summary>
-        public InputAction @TakePhoto => m_Wrapper.m_Player_TakePhoto;
+        public InputAction @Photo => m_Wrapper.m_Player_Photo;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1462,15 +1436,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
-            @ThrowGranade.started += instance.OnThrowGranade;
-            @ThrowGranade.performed += instance.OnThrowGranade;
-            @ThrowGranade.canceled += instance.OnThrowGranade;
             @Flashlight.started += instance.OnFlashlight;
             @Flashlight.performed += instance.OnFlashlight;
             @Flashlight.canceled += instance.OnFlashlight;
-            @TakePhoto.started += instance.OnTakePhoto;
-            @TakePhoto.performed += instance.OnTakePhoto;
-            @TakePhoto.canceled += instance.OnTakePhoto;
+            @Photo.started += instance.OnPhoto;
+            @Photo.performed += instance.OnPhoto;
+            @Photo.canceled += instance.OnPhoto;
         }
 
         /// <summary>
@@ -1512,15 +1483,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
-            @ThrowGranade.started -= instance.OnThrowGranade;
-            @ThrowGranade.performed -= instance.OnThrowGranade;
-            @ThrowGranade.canceled -= instance.OnThrowGranade;
             @Flashlight.started -= instance.OnFlashlight;
             @Flashlight.performed -= instance.OnFlashlight;
             @Flashlight.canceled -= instance.OnFlashlight;
-            @TakePhoto.started -= instance.OnTakePhoto;
-            @TakePhoto.performed -= instance.OnTakePhoto;
-            @TakePhoto.canceled -= instance.OnTakePhoto;
+            @Photo.started -= instance.OnPhoto;
+            @Photo.performed -= instance.OnPhoto;
+            @Photo.canceled -= instance.OnPhoto;
         }
 
         /// <summary>
@@ -1892,13 +1860,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAim(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "ThrowGranade" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnThrowGranade(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "Flashlight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -1906,12 +1867,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnFlashlight(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "TakePhoto" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Photo" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnTakePhoto(InputAction.CallbackContext context);
+        void OnPhoto(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

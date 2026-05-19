@@ -1,90 +1,45 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections;
 
 public class EnemyAI : MonoBehaviour
 {
     [Header("References")]
-    public Transform player;
-
-    [Header("Movement")]
-    public float normalSpeed = 5f;
-    public float slowedSpeed = 2f;
-
-    [Header("States")]
-    public bool isStunned;
+    [SerializeField] private Transform player;
 
     private NavMeshAgent agent;
+    private EnemyBase enemyBase;
 
-    private Coroutine slowCoroutine;
+    private bool canMove = true;
 
-    void Start()
+    private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-
-        agent.speed = normalSpeed;
+        enemyBase = GetComponent<EnemyBase>();
     }
 
     void Update()
     {
-        if (player == null) return;
-
-        // Si está stun
-        if (isStunned)
+        if (canMove)
         {
-            agent.isStopped = true;
-            return;
-        }
-
-        agent.isStopped = false;
-
-        // Perseguir jugador
-        agent.SetDestination(player.position);
-    }
-
-    // LINTERNA
-    public void SlowEnemy(float duration)
-    {
-        if (isStunned) return;
-
-        agent.speed = slowedSpeed;
-
-        if (slowCoroutine != null)
-        {
-            StopCoroutine(slowCoroutine);
-        }
-
-        slowCoroutine = StartCoroutine(ResetSpeed(duration));
-    }
-
-    IEnumerator ResetSpeed(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-
-        if (!isStunned)
-        {
-            agent.speed = normalSpeed;
+            agent.SetDestination(player.position);
         }
     }
 
-    // CÁMARA
-    public void StunEnemy(float duration)
+    public void StopMovement(float duration)
     {
-        StartCoroutine(StunCoroutine(duration));
+        StartCoroutine(StopCoroutine(duration));
     }
 
-    IEnumerator StunCoroutine(float duration)
+    System.Collections.IEnumerator StopCoroutine(float duration)
     {
-        isStunned = true;
+        canMove = false;
 
         agent.isStopped = true;
 
         yield return new WaitForSeconds(duration);
 
-        isStunned = false;
-
         agent.isStopped = false;
 
-        agent.speed = normalSpeed;
+        canMove = true;
     }
 }

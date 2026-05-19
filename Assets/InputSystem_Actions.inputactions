@@ -97,15 +97,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ThrowGranade",
-                    "type": "Button",
-                    "id": "1909b9aa-3f83-4b51-b1fd-815011ab2659",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Flashlight",
                     "type": "Button",
                     "id": "9c6dd43c-a34e-4f49-8f5d-3615d956e3bb",
@@ -115,7 +106,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "TakePhoto",
+                    "name": "Photo",
                     "type": "Button",
                     "id": "94b1cfe1-9f82-4f94-8d56-916d9b4a47d2",
                     "expectedControlType": "",
@@ -523,17 +514,6 @@
                 },
                 {
                     "name": "",
-                    "id": "c7c66e96-ce6a-48b7-a599-c3bb567a33fd",
-                    "path": "<Keyboard>/g",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "ThrowGranade",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "068f44f0-fb80-49a4-a590-15af5c8c7aba",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
@@ -550,7 +530,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TakePhoto",
+                    "action": "Photo",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

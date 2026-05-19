@@ -119,6 +119,38 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &56717511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 56717512}
+  m_Layer: 0
+  m_Name: CameraHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &56717512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56717511}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 370097454}
+  m_Father: {fileID: 718831681}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &96860008
 Mesh:
   m_ObjectHideFlags: 0
@@ -332,7 +364,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 790911027}
-  m_Father: {fileID: 718831681}
+  - {fileID: 1739841407}
+  m_Father: {fileID: 56717512}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &370097455
 MonoBehaviour:
@@ -450,11 +483,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Flashlight
   flashlight: {fileID: 952493082}
-  flashlightRange: 15
-  maxBattery: 100
-  currentBattery: 0
-  batteryDrain: 10
-  slowResetTime: 0.2
+  playerCamera: {fileID: 370097457}
+  flashlightDistance: 12
 --- !u!114 &370097459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,11 +497,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8381615c2ae7024da18c27ab6b85ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraWeapon
-  cameraRange: 10
-  stunDuration: 3
-  maxPhotos: 5
-  currentPhotos: 0
-  cooldown: 2
+  playerCamera: {fileID: 370097457}
+  flashEffect: {fileID: 0}
+  photoDistance: 15
 --- !u!1 &718831677
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,8 +512,8 @@ GameObject:
   - component: {fileID: 718831680}
   - component: {fileID: 718831679}
   - component: {fileID: 718831678}
-  - component: {fileID: 718831682}
   - component: {fileID: 718831683}
+  - component: {fileID: 718831684}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -582,28 +610,13 @@ Transform:
   m_GameObject: {fileID: 718831677}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.87, y: 1.12, z: 9.74}
+  m_LocalPosition: {x: 0, y: 1.25, z: 7.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 370097454}
+  - {fileID: 56717512}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &718831682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718831677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c2bd3ddfcb05e54ca50fce0176975f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 5
-  mouseSensitivity: 50
-  cameraTransform: {fileID: 370097454}
 --- !u!143 &718831683
 CharacterController:
   m_ObjectHideFlags: 0
@@ -629,6 +642,24 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &718831684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718831677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14106b1e5ef16a441bee1ebdf39b53ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FirstPersonController
+  cameraHolder: {fileID: 56717512}
+  moveSpeed: 5
+  sprintSpeed: 8
+  jumpForce: 8
+  gravity: -20
+  mouseSensitivity: 2
 --- !u!1 &761712798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,6 +1047,52 @@ Transform:
   m_Children:
   - {fileID: 952493080}
   m_Father: {fileID: 370097454}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &864192171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 864192173}
+  - component: {fileID: 864192172}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &864192172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864192171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b531195b5d2b1d44e90cc7ef65d0f396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  flashlightSystem: {fileID: 370097458}
+  cameraSystem: {fileID: 370097459}
+--- !u!4 &864192173
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864192171}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.69458, y: -0, z: 5.76673}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &916946383
 GameObject:
@@ -2669,6 +2746,7 @@ GameObject:
   - component: {fileID: 1561939443}
   - component: {fileID: 1561939442}
   - component: {fileID: 1561939441}
+  - component: {fileID: 1561939447}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -2689,9 +2767,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   player: {fileID: 718831681}
-  normalSpeed: 5
-  slowedSpeed: 2
-  isStunned: 0
 --- !u!195 &1561939442
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2801,11 +2876,56 @@ Transform:
   m_GameObject: {fileID: 1561939440}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.89386, y: 1.2, z: -5.75}
+  m_LocalPosition: {x: 0, y: 1.49, z: -8.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1561939447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561939440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f994bec0e781642bcd3634a8952675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
+  diesFromCamera: 0
+  scaredOfFlashlight: 1
+--- !u!1 &1739841406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1739841407}
+  m_Layer: 0
+  m_Name: PhotoHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1739841407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739841406}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 370097454}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1811039877
 GameObject:
@@ -2944,3 +3064,4 @@ SceneRoots:
   - {fileID: 761712804}
   - {fileID: 1561939446}
   - {fileID: 1265928561}
+  - {fileID: 864192173}

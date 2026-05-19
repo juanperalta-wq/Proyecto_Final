@@ -131,7 +131,7 @@ public class ThirdPersonController : MonoBehaviour
         inputs.Player.Look.performed += ctx => MouseMovement = ctx.ReadValue<Vector2>();
         inputs.Player.Look.canceled += ctx => MouseMovement = Vector2.zero;
 
-        inputs.Player.ThrowGranade.performed += ThrowSmt;
+        //inputs.Player.ThrowGranade.performed += ThrowSmt;
 
         // inputs.Player.Sprint.performed += OnDash;
     }

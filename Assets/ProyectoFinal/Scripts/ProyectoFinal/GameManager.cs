@@ -2,29 +2,26 @@ using System;
 using Unity.Cinemachine;
 using UnityEngine;
 using Sirenix.OdinInspector;
-
 public class GameManager : MonoBehaviour
 {
-    public CinemachineCamera camA;
-    public CinemachineCamera camB;
+    public static GameManager Instance;
 
+    [Header("Systems")]
+    public FlashlightSystem flashlightSystem;
+    public CameraSystem cameraSystem;
 
-    [Button("Transition")]
-    public void transition()
+    private void Awake()
     {
-        if (camA.Priority > camB.Priority)
+        // Evita duplicados
+        if (Instance != null && Instance != this)
         {
-            camA.Priority = 0;
-            camB.Priority = 1;
+            Destroy(gameObject);
+            return;
         }
-        else
-        {
-            camA.Priority = 1;
-            camB.Priority = 0;
-        }
-    }
-    public void OnCameraFinished()
-    {
-        Debug.Log("Camera transition finished!");
+
+        Instance = this;
+
+        // Persiste entre escenas
+        DontDestroyOnLoad(gameObject);
     }
 }
