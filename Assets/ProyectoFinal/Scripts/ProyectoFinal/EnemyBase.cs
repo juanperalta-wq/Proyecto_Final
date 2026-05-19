@@ -1,8 +1,9 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    [Header("Enemy Settings")]
+    [FoldoutGroup("Variables")]
     public bool diesFromCamera;
     public bool scaredOfFlashlight;
 

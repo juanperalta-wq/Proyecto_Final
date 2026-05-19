@@ -1,24 +1,25 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class FirstPersonController : MonoBehaviour
 {
-    [Header("References")]
-    public InputSystem_Actions inputs;
-
-    private CharacterController controller;
-
+    [FoldoutGroup("Variables")]
+    [SerializeField]public InputSystem_Actions inputs;
+    [FoldoutGroup("Variables")]
+    [SerializeField]private CharacterController controller;
+    [FoldoutGroup("Variables")]
     [SerializeField] private Transform cameraHolder;
 
-    [Header("Movement")]
+    [HorizontalGroup("Movement")]
     public float moveSpeed = 5f;
     public float sprintSpeed = 8f;
 
-    [Header("Jump")]
+    [HorizontalGroup("Jump")]
     public float jumpForce = 8f;
     public float gravity = -20f;
 
-    [Header("Mouse")]
+    [HorizontalGroup("Mouse")]
     public float mouseSensitivity = 0.20f;
 
     private Vector2 moveInput;

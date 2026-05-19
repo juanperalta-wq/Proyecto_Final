@@ -1,16 +1,19 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    [Header("References")]
+    #region variables
+    [FoldoutGroup("Variables")]
     [SerializeField] private Transform player;
-
-    private NavMeshAgent agent;
-    private EnemyBase enemyBase;
-
-    private bool canMove = true;
-
+    [FoldoutGroup("Variables")]
+    [SerializeField]private NavMeshAgent agent;
+    [FoldoutGroup("Variables")]
+    [SerializeField]private EnemyBase enemyBase;
+    [FoldoutGroup("Variables")]
+    [SerializeField]private bool canMove = true;
+    #endregion
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
