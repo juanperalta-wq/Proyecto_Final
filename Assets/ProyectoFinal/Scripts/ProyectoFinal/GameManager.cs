@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Systems")]
     public FlashlightSystem flashlightSystem;
-    //public CameraSystem cameraSystem;
+    public CameraSystem cameraSystem;
 
     private void Awake()
     {

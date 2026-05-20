@@ -2,18 +2,26 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
 using Sirenix.OdinInspector;
+
 public class FirstPersonController : MonoBehaviour
 {
+    [Title("Referencias")]
     public InputSystem_Actions inputs;
     private CharacterController controller;
     public CinemachineCamera characterCamera;
 
-    public float moveSpeed = 5f;
-    public float verticalVelocity = 0;
-    public float jumpForce = 10;
-    public float pushForce = 4;
+    [Title("Movimiento")]
+    [SuffixLabel("u/s")] public float moveSpeed = 5f;
 
-    [SerializeField] private Vector2 moveInput;
+    [Title("Salto")]
+    [SuffixLabel("fuerza")] public float jumpForce = 10;
+    [ReadOnly] public float verticalVelocity = 0;
+
+    [Title("Colisiones")]
+    [SuffixLabel("fuerza")] public float pushForce = 4;
+
+    [Title("Debug")]
+    [ReadOnly, SerializeField] private Vector2 moveInput;
 
     private void Awake()
     {
@@ -66,5 +74,13 @@ public class FirstPersonController : MonoBehaviour
     {
         if (!controller.isGrounded) return;
         verticalVelocity = jumpForce;
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Vector3 pushDir = (hit.transform.position - transform.position).normalized;
+
+        if (hit.rigidbody != null && hit.rigidbody.linearVelocity == Vector3.zero)
+            hit.rigidbody.AddForce(pushDir * pushForce, ForceMode.Impulse);
     }
 }
