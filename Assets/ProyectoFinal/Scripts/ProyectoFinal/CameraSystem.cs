@@ -1,16 +1,17 @@
+using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 
 public class CameraSystem : MonoBehaviour
 {
-    [Header("References")]
+    [FoldoutGroup("Variables")]
     [SerializeField] private Camera playerCamera;
+    [FoldoutGroup("Variables")]
     [SerializeField] private GameObject flashEffect;
-
-    [Header("Settings")]
+    [FoldoutGroup("Variables")]
     [SerializeField] private float photoDistance = 15f;
-
+    [FoldoutGroup("Variables")]
     private InputSystem_Actions inputs;
 
     private void Awake()
