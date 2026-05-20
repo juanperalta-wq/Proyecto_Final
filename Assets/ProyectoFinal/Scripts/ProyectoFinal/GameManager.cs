@@ -1,7 +1,5 @@
-using System;
-using Unity.Cinemachine;
 using UnityEngine;
-using Sirenix.OdinInspector;
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -9,6 +7,9 @@ public class GameManager : MonoBehaviour
     [Header("Systems")]
     public FlashlightSystem flashlightSystem;
     public CameraSystem cameraSystem;
+
+    [Header("Databases")]
+    public MusicDatabase musicDatabase;
 
     private void Awake()
     {
@@ -21,7 +22,6 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
 
-        // Persiste entre escenas
         DontDestroyOnLoad(gameObject);
     }
 }
